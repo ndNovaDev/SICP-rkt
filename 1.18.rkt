@@ -9,12 +9,13 @@
   (/ x 2))
 
 
-
 (define (multi a b)
-  (cond ((= b 0) 0)
-        ((= b 1) a)
-        ((even? b) (multi (double a) (halve b)))
-        (else (+ a (multi a (- b 1))))))
+  (define (it a b x)
+    (cond ((= b 0) x)
+          ((= b 1) (+ a x))
+          ((even? b) (it (double a) (halve b) x))
+          (else (it a (- b 1) (+ x a)))))
+  (it a b 0))
 
 (multi 3 7)
 (multi 2 4)
