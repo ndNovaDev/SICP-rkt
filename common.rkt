@@ -9,4 +9,36 @@
 (define (even? n)
   (= (remainder n 2) 0))
 
-(provide square average even?)
+(define (expt b n)
+  (define (it b n a)
+    (cond ((= n 0) 1)
+          ((= n 1) (* b a))
+          ((even? n) (it (* b b) (/ n 2) a))
+          (else (it b (- n 1) (* a b)))))
+  (it b n 1))
+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+; (define (expmod base exp m)
+;   (if (= exp 0)
+;       1
+;       (remainder (expt base exp) m)))
+
+; (define (fermat-test n)
+;   (define (try-it a)
+;     (= (expmod a n n) a))
+;   (try-it (+ 1 (random (- n 1)))))
+; (define (fast-prime? n times)
+;   (cond ((= times 0) true)
+;   ((fermat-test n) (fast-prime? n (- times 1)))
+;   (else #f)))
+; (define (prime?))
+
+(provide square average even? expt smallest-divisor)
