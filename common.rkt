@@ -48,4 +48,4 @@
    ((fermat-test n) (fast-prime? n (- times 1)))
    (else #f)))
 
-(provide square average even? expt smallest-divisor fast-prime?)
+(provide square average even? expt smallest-divisor fast-prime? expmod)
